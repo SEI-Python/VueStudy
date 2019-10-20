@@ -1,26 +1,33 @@
-let data = { a : 1 ,
-            newTodoText:'',
-            visitCount:0,
-            hideCompletedTodos:false,
-            todos:[],
-            error:null
-            }
+let data = {
+    a: 1,
+    newTodoText: '',
+    visitCount: 0,
+    hideCompletedTodos: false,
+    todos: [],
+    error: null
+}
 
 let vm = new Vue({
-    data
+    el: '#app',
+    data,
 });
 
-console.log( vm.a == data.a ) // tureと返される
+vm.$watch("a", (newValue, oldValue) => {
+    //このコールバックは'vm.a'の値が変わる時に呼ばれます
+    console.log("aが変更されました");
+});
+
+console.log(`a-true:${vm.a == data.a}`); // tureと返される
 
 vm.a = 2
-console.log(data.a) //2と返される
+console.log("a:" + data.a); //2と返される
 
 data.a = 3
-console.log(vm.a) //3と返される
+console.log("a:" + vm.a); //3と返される
 
 vm.b = 'hi'
-console.log(vm.b)
+console.log("b:" + vm.b);
 
-
-
+console.log(`vm-data:${vm.$data === data}`); // => true
+console.log(`el:${vm.$el === document.getElementById("app")}`); //=>true
 
